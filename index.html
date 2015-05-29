@@ -28,8 +28,20 @@
         <br>
         We compare your statistics with the rest of the world.
       </h3>
-    </div>  
+    </div> 
   </section>
+</div>
+
+<div id="form" class="container">
+  <div>
+    <label for="name">Name:</label>
+    <input type="email" class="form-control" id="email">
+  </div>
+  <div>
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd">
+  </div>
+  <button id="formSubmit" class="btn btn-default">Submit</button>
 </div>
 
 <div class="container">
@@ -79,6 +91,20 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  $("#graphic").hide("slow");
+});
+
+
+$("#formSubmit").click(function() {
+  if($("#email").val.length > 0 && $("#pwd").val.length > 0) {
+      $("#form").hide("slow");
+      $("#graphic").delay(500).show("slow");
+  }
+});
+</script>
 
 
 <script src="js/d3.js"></script>
