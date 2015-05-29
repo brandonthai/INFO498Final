@@ -8,7 +8,7 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var top = (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0);
+
 
   var width = 600;
   var height = 520;
@@ -160,23 +160,13 @@ var scrollVis = function() {
       .attr("class", "title openvis-title")
       .attr("x", width / 2)
       .attr("y", height / 3)
-      .text(function(d) {
-
-        if (top > window.innerHeight) {
-          return "2013";
-        }
-
-      });
+      .text("2013");
 
     g.append("text")
       .attr("class", "sub-title openvis-title")
       .attr("x", width / 2)
       .attr("y", (height / 3) + (height / 5) )
-      .text(function(d) {
-        if (top > window.innerHeight) {
-          return "OpenVis Conf";
-        }
-      });
+      .text("OpenVis Conf");
 
     g.selectAll(".openvis-title")
       .attr("opacity", 0);

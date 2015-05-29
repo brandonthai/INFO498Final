@@ -96,21 +96,22 @@
   font-size: 500%;
 }
 
-#intro {
+#intro1 {
   background: url(../img/background-2.jpg) 50% 0 repeat fixed;
-  height: 100vh;
+  height: 50vh;
   margin: 0 auto;
   width: 100%;
   position: relative;
   color: white;
+  padding-bottom: 10vh;
 }
 
-#intro div {
+#intro1 div {
   position: absolute;
   padding-top: 30vh;
 }
 
-#intro div h2 {
-  font-size: 500%;
+#intro1 div h2 {
+  font-size: 300%;
 }
 
