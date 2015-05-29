@@ -774,4 +774,3 @@ function display(data) {
 
 // load data and display
 d3.tsv("data/words.tsv", display);
-
