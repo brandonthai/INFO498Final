@@ -98,17 +98,11 @@
 
 #intro1 {
   background: url(../img/background-2.jpg) 50% 0 repeat fixed;
-  height: 50vh;
+  height: 100vh;
   margin: 0 auto;
   width: 100%;
-  position: relative;
   color: white;
-  padding-bottom: 10vh;
-}
-
-#intro1 div {
-  position: absolute;
-  padding-top: 30vh;
+  position: relative;
 }
 
 #intro1 div h2 {
