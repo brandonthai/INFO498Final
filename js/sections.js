@@ -160,7 +160,7 @@ var scrollVis = function() {
       .attr("class", "title openvis-title")
       .attr("x", width / 2)
       .attr("y", height / 3)
-      .text("2013");
+      .text("RIPPPPP");
 
     g.append("text")
       .attr("class", "sub-title openvis-title")
@@ -188,17 +188,6 @@ var scrollVis = function() {
       .attr("opacity", 0);
 
     // square grid
-    var squares = g.selectAll(".square").data(wordData);
-    squares.enter()
-      .append("rect")
-      .attr("width", squareSize)
-      .attr("height", squareSize)
-      .attr("fill", "#fff")
-      .classed("square", true)
-      .classed("fill-square", function(d) { return d.filler; })
-      .attr("x", function(d) { return d.x;})
-      .attr("y", function(d) { return d.y;})
-      .attr("opacity", 0);
 
     // barchart
     var bars = g.selectAll(".bar").data(fillerCounts);

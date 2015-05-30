@@ -1,3 +1,6 @@
+.gone {
+  visibility: hidden;
+}
 
 .container {
   width: 890px;

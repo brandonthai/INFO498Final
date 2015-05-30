@@ -2,14 +2,20 @@
 <html>
 <head>
   <title>Scrolling Sections</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>  
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/sections.js"></script>
-  <script type="text/javascript" src="js/scroller.js"></script>
-  <script type="text/javascript" src="js/queue.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css?<?php echo time(); ?>"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css?<?php echo time(); ?>"/>  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js?<?php echo time(); ?>"></script>
+  <script type="text/javascript" src="js/main.js?<?php echo time(); ?>"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8?<?php echo time(); ?>"></script>
+  <script type="text/javascript" src="js/sections.js?<?php echo time(); ?>"></script>
+  <script type="text/javascript" src="js/scroller.js?<?php echo time(); ?>"></script>
+  <script type="text/javascript" src="js/queue.js?<?php echo time(); ?>"></script>
+
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
 
 </head>
 <body>
@@ -111,7 +117,10 @@
         scrollTop: $("#information").offset().top
       }, 200);      
       // $("#home").remove();
-      // $("#intro1").remove();            
+      // $("#intro1").remove();
+
+      $("#intro1").addClass("gone");
+      $("#home").addClass("gone");            
       $("#graphic").show(200);
     });     
   
