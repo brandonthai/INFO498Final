@@ -7,6 +7,9 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/sections.js"></script>
+  <script type="text/javascript" src="js/scroller.js"></script>
+  <script type="text/javascript" src="js/queue.js"></script>
 
 </head>
 <body>
@@ -49,7 +52,7 @@
       </div>      
   </div>
 
-  <div class="container">
+  <div id="information" class="container">
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <div id='graphic'>
       <div id='sections'>
@@ -104,9 +107,15 @@
   });
 
   $("#formSubmit").click(function() {
-      // $("#home").hide();
-      $("#intro1").hide();
+    var offset = 20; //Offset of 20px
+
+    $('html, body').animate({
+        scrollTop: $("#information").offset().top + offset
+    }, 2000);
+
       $("#graphic").show();
+      // $("#home").remove();
+      // $("#intro1").remove();            
     }); 
   
 </script>
