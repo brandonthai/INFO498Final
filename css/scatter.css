@@ -1,0 +1,26 @@
+body {
+	font-family:helvetica;
+}
+#scatter-svg {
+	height:1000px;
+	width:1000px;
+}
+
+.axis path, .axis line  {
+	fill: none;
+	stroke: black;
+	opacity:.3;
+	shape-rendering: crispEdges;
+}
+
+.tick text {
+	opacity:.6;
+}
+
+.axis-label {
+	font-size:22px;
+}
+
+.title {
+	font-size:30px;
+}
