@@ -1,0 +1,128 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Dynamic Annotations in a Visualization Stepper</title>
+  <meta name="author" content="Jim Vallandingham">
+  <meta name="description" content="">
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/stepper.css">
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="container">
+    <h1>Dynamic Annotations in a Visualization Stepper</h1>
+    <div id="vis-nav">
+      <a href="#" id="step1" class="step-link active" class="btn btn-default">Step1</a>
+      <a href="#" id="step2" class="step-link" class="btn btn-default">Step2</a>
+      <a href="#" id="step3" class="step-link" class="btn btn-default">Step3</a>
+    </div>
+    <div id="vis-container">
+      <div id="annotation-steps">
+        <div class="annotation-step" id="step1-annotation" style="display:block;">
+          <div class="annotation" id="step1-left-annotation" >
+            <h4>Left Annotation Title</h4>
+            <p>Here is the annotation text for the <strong>left</strong> annotation of step 1</p>
+          </div>
+          <div class="annotation" id="step1-right-annotation" >
+            <h4>Right Annotation Title</h4>
+            <p>Here is the annotation text for the <strong>right</strong> annotation of step 1</p>
+          </div>
+        </div>
+        <div class="annotation-step" id="step2-annotation">
+          <div class="annotation" id="step2-center-annotation" >
+            <p>Here is the annotation text for the center annotation of step 2.<br/> 
+              We are using absolute positioning of these divs</p>
+            <p id="test" ></p>
+          </div>
+        </div>
+        <div class="annotation-step" id="step3-annotation">
+          <div class="annotation" id="step3-high-annotation" >
+            <h4>High Annotation Title</h4>
+            <p>This is text up high.</p>
+          </div>
+          <div class="annotation" id="step3-low-annotation" >
+            <h4>Low Annotation Title</h4>
+            <p>This is text down low.</p>
+          </div>
+        </div>
+      </div>
+      <div id="vis-canvas"></div>
+    </div>
+  </div>
+  <script src="js/stepper.js"></script>
+
+  <script>
+    var margin = {top: 20, right: 20, bottom: 30, left: 0},
+        width = 700 - margin.left - margin.right,
+        height = 350 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .1);
+
+    var y = d3.scale.linear()
+        .range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(10, "%");
+
+    var svg = d3.select("#test").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.tsv("data.tsv", type, function(error, data) {
+      x.domain(data.map(function(d) { return d.letter; }));
+      y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Frequency");
+
+      svg.selectAll(".bar")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", "bar")
+          .attr("x", function(d) { return x(d.letter); })
+          .attr("width", x.rangeBand())
+          .attr("y", function(d) { return y(d.frequency); })
+          .attr("height", function(d) { return height - y(d.frequency); });
+
+    });
+    
+    function type(d) {
+      d.frequency = +d.frequency;
+      return d;
+}
+
+</script>
+</body>
