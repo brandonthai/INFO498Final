@@ -62,6 +62,7 @@
             <h4>High Annotation Title</h4>
             <p>This is text up high.</p>
           </div>
+          <p id="scatter"></p>
           <div class="annotation" id="step3-low-annotation" >
             <h4>Low Annotation Title</h4>
             <p>This is text down low.</p>
@@ -74,6 +75,108 @@
   <script src="js/stepper.js"></script>
 
   <script>
+
+  var bp_margin = {top: 20, right: 20, bottom: 30, left: 40},
+    bp_width = 960 - bp_margin.left - bp_margin.right,
+    bp_height = 500 - bp_margin.top - bp_margin.bottom;
+
+    // setup x 
+    var bp_xValue = function(d) { return d.age;}, // data -> value
+        bp_xScale = d3.scale.linear().range([0, bp_width]), // value -> display
+        bp_xMap = function(d) { return bp_xScale(bp_xValue(d));}, // data -> display
+        bp_xAxis = d3.svg.axis().scale(bp_xScale).orient("bottom");
+
+    // setup y
+    var bp_yValue = function(d) { return d.blood_pressure;}, // data -> value
+        bp_yScale = d3.scale.linear().range([bp_height, 0]), // value -> display
+        bp_yMap = function(d) { return bp_yScale(bp_yValue(d));}, // data -> display
+        bp_yAxis = d3.svg.axis().scale(bp_yScale).orient("left");
+
+    // setup fill color
+    var bp_cValue = function(d) { return d.blood_pressure;},
+        bp_color = d3.scale.category10();
+
+    // add the graph canvas to the body of the webpage
+    var bp_svg = d3.select("#scatter").append("svg")
+        .attr("width", bp_width + bp_margin.left + bp_margin.right)
+        .attr("height", bp_height + bp_margin.top + bp_margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + bp_margin.left + "," + bp_margin.top + ")");
+
+    // add the tooltip area to the webpage
+    var bp_tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    d3.csv("diabetes.csv", function(error, data) {
+      // change string (from CSV) into number format
+      data.forEach(function(d) {
+        d.pregnancies = +d.pregnancies;
+        d.plasma_glucose = +d.plasma_glucose;
+        d.blood_pressure = +d.blood_pressure;
+        d.triceps_skin_thickness = +d.triceps_skin_thickness;
+        d.insulin = +d.insulin;
+        d.bmi = +d.bmi;
+        d.diabetes_pedigree = +d.diabetes_pedigree;
+        d.age = +d.age;
+      });
+
+      // don't want dots overlapping axis, so add in buffer to data domain
+      bp_xScale.domain([d3.min(data, bp_xValue)-1, d3.max(data, bp_xValue)+1]);
+      bp_yScale.domain([d3.min(data, bp_yValue)-1, d3.max(data, bp_yValue)+1]);
+
+      // x-axis
+      bp_svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + bp_height + ")")
+          .call(bp_xAxis)
+        .append("text")
+          .attr("class", "label")
+          .attr("x", bp_width)
+          .attr("y", -6)
+          .style("text-anchor", "end")
+          .text("Age");
+
+      // y-axis
+      bp_svg.append("g")
+          .attr("class", "y axis")
+          .call(bp_yAxis)
+          .append("text")
+          .attr("class", "label")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Blood Pressure Level");
+
+      // draw dots
+      bp_svg.selectAll(".dot")
+          .data(data)
+          .enter().append("circle")
+          .attr("class", "dot")
+          .attr("r", 3.5)
+          .attr("cx", bp_xMap)
+          .attr("cy", bp_yMap)
+          .style("fill", function(d) { return bp_color(bp_cValue(d));}) 
+          .on("mouseover", function(d) {
+              bp_tooltip.transition()
+                   .duration(200)
+                   .style("opacity", .9);
+              bp_tooltip.html("Person" + "<br/> (" + "Age: " + bp_xValue(d) 
+              + ", " + "BP: " + bp_yValue(d) + ")")
+                   .style("left", (d3.event.pageX + 5) + "px")
+                   .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+              bp_tooltip.transition()
+                   .duration(500)
+                   .style("opacity", 0);
+          });  
+    });
+
+
+
+
   var data = [["Nuts",0.27], ["coffee",0.11], ["Rice",-0.17], ["Sugary drinks",0.26], ["Yogurt",0.28], ["Brown Rice", 0.11]
   , ["Fruit Drinks", -0.31], ["3 oz serving of red meat/day", -0.20], ["2 Slices of Bacon", -0.51], ["Hotdog", -0.51], ["Poultry", 0.35], ["Fish", 0.35], ["Fast Food", -0.27], ["Dairy", 0.23], ["TV(2 hours)", -0.20], ["Walking(1/2 hour errday)", 0.30], ["Smoking", -0.50]];
 
