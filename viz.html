@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/stepper.css">
+   <link rel="stylesheet" href="bchart.css">
     <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -19,6 +20,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="bchart.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
   <div id="container">
@@ -32,12 +35,19 @@
       <div id="annotation-steps">
         <div class="annotation-step" id="step1-annotation" style="display:block;">
           <div class="annotation" id="step1-left-annotation" >
-            <h4>Left Annotation Title</h4>
-            <p>Here is the annotation text for the <strong>left</strong> annotation of step 1</p>
+            <div class="checkbox">
+              <label><input type="checkbox" value="">Option 1</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="">Option 2</label>
+            </div>
+            <div class="checkbox disabled">
+              <label><input type="checkbox" value="">Option 3</label>
+            </div>
           </div>
           <div class="annotation" id="step1-right-annotation" >
             <h4>Right Annotation Title</h4>
-            <p>Here is the annotation text for the <strong>right</strong> annotation of step 1</p>
+            <p id="barchart"></p>
           </div>
         </div>
         <div class="annotation-step" id="step2-annotation">
@@ -64,6 +74,18 @@
   <script src="js/stepper.js"></script>
 
   <script>
+  var data = [["Nuts",0.27], ["coffee",0.11], ["Rice",-0.17], ["Sugary drinks",0.26], ["Yogurt",0.28], ["Brown Rice", 0.11]
+  , ["Fruit Drinks", -0.31], ["3 oz serving of red meat/day", -0.20], ["2 Slices of Bacon", -0.51], ["Hotdog", -0.51], ["Poultry", 0.35], ["Fish", 0.35], ["Fast Food", -0.27], ["Dairy", 0.23], ["TV(2 hours)", -0.20], ["Walking(1/2 hour errday)", 0.30], ["Smoking", -0.50]];
+
+d3.select("#barchart")
+  .datum(data)
+    .call(columnChart()
+      .width(960)
+      .height(500)
+      .x(function(d, i) { return d[0]; })
+      .y(function(d, i) { return d[1]; }));
+
+//Page 2
     var margin = {top: 20, right: 20, bottom: 30, left: 0},
         width = 700 - margin.left - margin.right,
         height = 350 - margin.top - margin.bottom;
