@@ -12,12 +12,14 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="css/animate.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>    
     <script>
       new WOW().init();
     </script>
     <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
   </head>
 
@@ -25,13 +27,14 @@
     <section id="section1" data-type="background" data-speed="10">
       <div class="container absolute-center">
         <h1 class="white header" data-scroll-reveal>We are <strong style="color: #3498DB">Team Health (+)</strong></h1>  
-        <img src="img/syringe.png" style="float: right; width: 35%; height: 35%;">
         <h2 class="beige">An Interactive Data Visualization Tool Geared Towards Visualizing Diabetes Risks</h1>
         <h4 class="beige">Created by Wei-Jung Chen, Daniel Huie, Vivian Teng, Brandon Thai</h4>
         <br>
-        <br>        
+        <br>
+        <center><a class="fa fa-5x fa-angle-double-down animated infinite pulse hover" href="#explanation" style="color: white; text-decoration: none;"></a></center>                
       </div>      
     </section>
+
     <section id="explanation">
       <div class="container absolute-center col-md-12">
           <div class="col-md-8">
@@ -43,32 +46,38 @@
             <p class="citation">Source: diabetes.org</p>
           </div>
           <div class="col-md-4">
-            <img class="first-infographic" src="img/glucose-monitor.png" style="width: 80%; height: 80%;">
+            <img class="first-infographic" src="img/glucose-monitor.png" style="width: 100%; height: 100%;">
           </div>                         
       </div>        
     </section>      
+
     <section id="section2" data-type="background" data-speed="10">
-      <div class="container absolute-center">
-        <div class="col-md-12">
-          <div class="col-md-8">
-            <h1 style="font-size: 350%;">Type II Diabetes is a serious condition.</h2>
+      <div class="container absolute-center white">
+        <div class="row">
+          <img src="img/dumbell.png" style="width: 175px; height: 175px; margin-right: 7em;">
+          <img src="img/carrot.png" style="width: 175px; height: 175px; margin-right: 7em;">
+          <img src="img/heart-icon.png" style="width: 175px; height: 175px; margin-right: 7em;">
+        </div>        
+        <br>
+        <div class="row">
+          <div class=" col-md-12">
+            <h1 style="font-size: 350%;">Type II Diabetes is a serious condition.</h1>
             <h3>Much of what you eat and do are contributing factors. Making wise food choices can help you...</h3>
             <br>
             <ul>
               <li>Feel good every day</li>
               <li>Lose weight if you need to</li>
               <li>Lower your risk for heart disease, stroke, and other problems caused by diabetes</li>
-            </ul>
-            <br>
-            <br>
-            <p class="citation">Source: http://diabetes.niddk.nih.gov/</p>
+            </ul>            
           </div>  
-          <div class="col-md-4">
-            slkdjflskdjfl
-          </div>
-        </div>
-      </div>
+        </div>  
+        <br>
+        <br>
+        <br>
+        <p style="color: white;">Source: http://diabetes.niddk.nih.gov/</p>                                       
+      </div>            
     </section>
+
     <section id="section3" data-type="background" data-speed="10">
       <div class="container absolute-center">
         <center>
@@ -76,13 +85,31 @@
         </center>
       </div>      
     </section>
+
     <section id="section4" data-type="background" data-speed="10">
       <div class="container absolute-center wow">
         <a href="viz.html">Let's begin your health assessment...</h2>
-      </div>      
+      </div> 
     </section>
 
 
-    
+<script>
+  $(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
+</script>  
+
+
   </body>
 </html>

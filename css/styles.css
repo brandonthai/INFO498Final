@@ -34,8 +34,8 @@ ul {
 
 .absolute-center {
 	position: absolute; 
-	top: 150px; 
 	width: 100%;
+	padding: 150px;
 }
 
 #section1 {
@@ -52,7 +52,7 @@ ul {
 }
 
 #section2 {	
-	background-color: #A1C2BF;
+	background-color: #319997;
 }
 
 #section3 {
@@ -71,9 +71,21 @@ ul {
 }
 
 #section4 a:active {
-	color: white;
+	color: white;	
+}
+
+#section4 a:hover {
+	color: #E74C3C;
+	text-decoration: none;
 }
 
 .citation {
 	color: gray;
+}
+
+a.fa-angle-double-down:hover {
+	background-color: #E74C3C;
+	border-radius: 100%;
+	width: 75px;
+	height: 75px;
 }
