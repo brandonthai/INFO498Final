@@ -1,5 +1,5 @@
 var userHeight = 60;
-var userWeight = 100;
+var userWeight = 140;
 var userSex = "Male";
 
 var userBmi = userWeight / (userHeight * userHeight) * 703;
@@ -52,6 +52,17 @@ function drawVis(data) {
         return col(d.sex);
     });
 }
+
+
+svg.append("circle")
+    .attr("cx", function(d) {
+        return x(2015);
+    })
+    .attr("cy", function(d) {
+        return y(userBmi);
+    })
+    .attr("r", 5)
+    .style("fill", "red")
 
 var xAxis = d3.svg.axis().scale(x).tickFormat(d3.format("d"));
 svg.append("g").attr("class", "axis").attr("transform", "translate(0," + h +
