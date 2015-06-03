@@ -1,5 +1,5 @@
 function columnChart() {
-  var margin = {top: 30, right: 10, bottom: 50, left: 50},
+  var margin = {top: 30, right: 10, bottom: 120, left: 50},
       width = 420,
       height = 420,
       xRoundBands = 0.2,
@@ -75,7 +75,14 @@ function columnChart() {
     // x axis at the bottom of the chart
      g.select(".x.axis")
         .attr("transform", "translate(0," + (height - margin.top - margin.bottom) + ")")
-        .call(xAxis.orient("bottom"));
+        .call(xAxis.orient("bottom"))
+        .selectAll("text")  
+     .style("text-anchor", "end")
+     .attr("dx", "-.8em")
+     .attr("dy", ".15em")
+     .attr("transform", function(d) {
+         return "rotate(-90)" 
+     });
     
     // zero line
      g.select(".x.axis.zero")
@@ -86,7 +93,6 @@ function columnChart() {
       // Update the y-axis.
       g.select(".y.axis")
         .call(yAxis);
-          
     });
   }
 

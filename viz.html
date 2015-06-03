@@ -294,13 +294,13 @@
 
 
   var data = [["Nuts",0.27], ["coffee",0.11], ["Rice",-0.17], ["Sugary drinks",0.26], ["Yogurt",0.28], ["Brown Rice", 0.11]
-  , ["Fruit Drinks", -0.31], ["3 oz serving of red meat/day", -0.20], ["2 Slices of Bacon", -0.51], ["Hotdog", -0.51], ["Poultry", 0.35], ["Fish", 0.35], ["Fast Food", -0.27], ["Dairy", 0.23], ["TV(2 hours)", -0.20], ["Walking(1/2 hour errday)", 0.30], ["Smoking", -0.50]];
+  , ["Fruit Drinks", -0.31], ["3 oz red meat/day", -0.20], ["2 Slices of Bacon", -0.51], ["Hotdog", -0.51], ["Poultry", 0.35], ["Fish", 0.35], ["Fast Food", -0.27], ["Dairy", 0.23], ["TV(2 hours)", -0.20], ["Walking(1/2 hour per day", 0.30], ["Smoking", -0.50]];
 
 d3.select("#barchart")
   .datum(data)
     .call(columnChart()
-      .width(960)
-      .height(500)
+      .width(775)
+      .height(450)
       .x(function(d, i) { return d[0]; })
       .y(function(d, i) { return d[1]; }));
 
