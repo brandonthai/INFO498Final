@@ -97,6 +97,18 @@ a.step-link:hover, a.active {
   width: 200px;
 }
 
+#step4-high-annotation {
+  left: 20px;
+  top: 30px;
+  width: 600px;
+}
+
+#step4-low-annotation {
+  left: 600px;
+  top: 30px;
+  width: 500px;
+}
+
 .bar {
   fill: steelblue;
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-  <title>Dynamic Annotations in a Visualization Stepper</title>
+  <title>Accessing Diabetes</title>
   <meta name="author" content="Jim Vallandingham">
   <meta name="description" content="">
 
@@ -21,15 +21,18 @@
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="bchart.js"></script>
+
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
   <div id="container">
-    <h1>Dynamic Annotations in a Visualization Stepper</h1>
+    <h1>What you need to know about diabetes?</h1>
     <div id="vis-nav">
       <a href="#" id="step1" class="step-link active" class="btn btn-default">Step1</a>
       <a href="#" id="step2" class="step-link" class="btn btn-default">Step2</a>
       <a href="#" id="step3" class="step-link" class="btn btn-default">Step3</a>
+      <a href="#" id="step4" class="step-link" class="btn btn-default">Step4</a>
+
     </div>
     <div id="vis-container">
       <div id="annotation-steps">
@@ -68,10 +71,123 @@
             <p>This is text down low.</p>
           </div>
         </div>
+
+        <div class="annotation-step" id="step4-annotation">
+          <div class="annotation" id="step4-high-annotation" >
+
+              <label for="age">How old are you?</label>
+                <select name="" id="age">
+                  <option selected="true" disabled="disabled">Select</option>    
+                  <option value="0">Less Than 40 years</option>
+                  <option value="1">40 - 49 years</option>
+                  <option value="2">50 - 59 years</option>
+                  <option value="3">60 years or older</option>
+                </select>
+
+              <br /> 
+              <br />  
+
+              <label for="gender">Gender:</label>
+                <select name="" id="gender">
+                  <option selected="true" disabled="disabled">Select</option>    
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+                </select>
+              
+              <br />
+              <br />  
+
+              <div id="genstational" style="display:none">
+                <label for="genstationalD">Have you ever been
+                    diagnosed with gestational diabetes?</label>
+                  <input type="radio" name="genstational" value="y"> Yes
+                  <input type="radio" name="genstational" value="n" checked> No
+                  <br /> 
+                  <br />
+              </div> 
+
+              <label for="">Do you have a mother, father, sister, or
+                brother with diabetes?</label>
+                <input type="radio" name="diabetes" value="y"> Yes
+                <input type="radio" name="diabetes" value="n" checked> No
+
+              <br />
+              <br />  
+
+              <label for="">Have you ever been diagnosed with high
+                blood pressure?</label>
+                <input type="radio" name="highbp" value="y"> Yes
+                <input type="radio" name="highbp" value="n" checked> No
+
+              <br />  
+              <br />
+
+              <label for="">Are you physically active?</label>
+                <br/>
+                <input type="radio" name="physical" value="y"> Yes
+                <input type="radio" name="physical" value="n" checked> No
+
+              <br />
+              <br /> 
+
+              <label for="height">Height:</label>
+                <select name="" id="height">
+                  <option selected="true" disabled="disabled">Select</option>    
+                  <option value="0">4’10”</option>
+                  <option value="1">4’ 11”</option>
+                  <option value="2">5’ 0”</option>
+                  <option value="3">5’ 1”</option>
+                  <option value="4">5’ 2”</option>
+                  <option value="5">5’ 3”</option>
+                  <option value="6">5’ 4”</option>
+                  <option value="7">5’ 5”</option>
+                  <option value="8">5’ 6”</option>
+                  <option value="9">5’ 7”</option>
+                  <option value="10">5’ 8”</option>
+                  <option value="11">5’ 9”</option>
+                  <option value="12">5’ 10”</option>
+                  <option value="13">5' 11"</option>
+                  <option value="14">6' 0"</option>
+                  <option value="15">6' 1"</option>
+                  <option value="16">6' 2"</option>
+                  <option value="17">6' 3"</option>
+                  <option value="18">6' 4"</option>
+                </select>
+
+              <br />
+
+              <label for="weight">Weight (lbs):</label>
+                <input type="number" id="weight" value="Weight (in pounds)">
+
+              <br /> 
+              <br />
+
+              <p id="errorMessage"></p>
+              <button id="submit">Submit</button>
+              <br />
+              <br />
+
+              <a href="http://main.diabetes.org/dorg/PDFs/risk-test-paper-version.pdf"><small>Source: Adapted from Bang et al., Ann Intern Med
+              151:775-783, 2009.</small>
+
+              <br />
+
+              <small>Original algorithm was validated without
+              gestational diabetes as part of the model.</small></a>
+
+          </div>
+          <div class="annotation" id="step4-low-annotation" >
+            <h2 id="score"></h4>
+            <h3 id="risk"></h3>
+            <div id="information">
+            </div>
+          </div>
+        </div>
       </div>
       <div id="vis-canvas"></div>
     </div>
   </div>
+  <script src="js/riskCalc.js"></script>
   <script src="js/stepper.js"></script>
 
   <script>
