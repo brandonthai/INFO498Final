@@ -25,35 +25,41 @@
 
   <body>
     <section id="section1" data-type="background" data-speed="10">
-      <div class="container absolute-center">
-        <h1 class="white header" data-scroll-reveal>We are <strong style="color: #3498DB">Team Health (+)</strong></h1>  
-        <h2 class="beige">An Interactive Data Visualization Tool Geared Towards Visualizing Diabetes Risks</h1>
-        <h4 class="beige">Created by Wei-Jung Chen, Daniel Huie, Vivian Teng, Brandon Thai</h4>
+      <div class="container" style="padding-top: 25vh">
+        <div class="col-md-3">
+          <img id="home-logo" class="wow bounceInLeft" src="img/blood_drop.png">
+        </div>
+        <div class="col-md-9">
+          <h1 class="white header wow bounceInDown" data-scroll-reveal>We are <strong style="color: #3498DB">Team Health (+)</strong></h1>  
+          <h2 id="project-desc" class="beige wow bounceInUp">An Interactive Data Visualization Tool Geared Towards Visualizing Diabetes Risks</h1>
+          <h4 id="creators" class="beige wow bounceInRight">Created by Wei-Jung Chen, Daniel Huie, Vivian Teng, Brandon Thai</h4>
+        </div>                
         <br>
-        <br>
-        <center><a class="fa fa-5x fa-angle-double-down animated infinite pulse hover" href="#explanation" style="color: white; text-decoration: none;"></a></center>                
+        <br>                            
       </div>      
+      <center><a id="down-arrow" class="fa fa-5x fa-angle-double-down animated wow fadeInUp pulse hover" href="#explanation" style="color: white; text-decoration: none;"></a></center>      
     </section>
 
     <section id="explanation">
       <div class="container absolute-center col-md-12">
           <div class="col-md-8">
-            <h1 style="font-size: 500%;">What is Type II Diabetes?</h1>
-            <h3>In type 2 diabetes, your body does not use insulin properly. This is called insulin resistance. At first, the pancreas makes extra insulin to make up for it. But, over time your pancreas isn’t able to keep up and can’t make enough insulin to keep your blood glucose levels normal. Type 2 is treated it with lifestyle changes, oral medications (pills), and insulin.</h3>
+            <h1 class="wow fadeInDown" style="font-size: 500%;">What is Type II Diabetes?</h1>
+            <h3 id="diabetes-explained" class="wow fadeIn">In type 2 diabetes, your body does not use insulin properly. This is called insulin resistance. At first, the pancreas makes extra insulin to make up for it. But, over time your pancreas isn’t able to keep up and can’t make enough insulin to keep your blood glucose levels normal. Type 2 is treated it with lifestyle changes, oral medications (pills), and insulin.</h3>
             <br>
             <br>
             <br>
-            <p class="citation">Source: diabetes.org</p>
+            <p class="citation wow fadeIn">Source: diabetes.org</p>
           </div>
           <div class="col-md-4">
-            <img class="first-infographic" src="img/glucose-monitor.png" style="width: 100%; height: 100%;">
+            <img id="glucose-monitor" class="first-infographic wow fadeInRight" src="img/glucose-monitor.png" style="width: 100%; height: 100%;">
           </div>                         
       </div>        
+      <center><a id="down-arrow2" class="fa fa-5x fa-angle-double-down animated wow fadeInUp pulse hover" href="#section2" style="color: white; text-decoration: none;"></a></center>
     </section>      
 
     <section id="section2" data-type="background" data-speed="10">
       <div class="container absolute-center white">
-        <div class="row">
+        <div class="row wow fadeIn">
           <img src="img/dumbell.png" style="width: 175px; height: 175px; margin-right: 7em;">
           <img src="img/carrot.png" style="width: 175px; height: 175px; margin-right: 7em;">
           <img src="img/heart-icon.png" style="width: 175px; height: 175px; margin-right: 7em;">
@@ -61,10 +67,10 @@
         <br>
         <div class="row">
           <div class=" col-md-12">
-            <h1 style="font-size: 350%;">Type II Diabetes is a serious condition.</h1>
-            <h3>Much of what you eat and do are contributing factors. Making wise food choices can help you...</h3>
+            <h1 class="wow slideInLeft" style="font-size: 350%;">Type II Diabetes is a serious condition.</h1>
+            <h3 class="wow slideInRight">Much of what you eat and do are contributing factors. Making wise food choices can help you...</h3>
             <br>
-            <ul>
+            <ul class="wow fadeInUp">
               <li>Feel good every day</li>
               <li>Lose weight if you need to</li>
               <li>Lower your risk for heart disease, stroke, and other problems caused by diabetes</li>
@@ -74,16 +80,8 @@
         <br>
         <br>
         <br>
-        <p style="color: white;">Source: http://diabetes.niddk.nih.gov/</p>                                       
+        <p class="wow fadeIn" style="color: white;">Source: http://diabetes.niddk.nih.gov/</p>                                       
       </div>            
-    </section>
-
-    <section id="section3" data-type="background" data-speed="10">
-      <div class="container absolute-center">
-        <center>
-          <img src="img/diabetes-infographic-1.png" style="width: 40%; height: 40%;">
-        </center>
-      </div>      
     </section>
 
     <section id="section4" data-type="background" data-speed="10">
