@@ -106,7 +106,17 @@ a.step-link:hover, a.active {
 #step4-low-annotation {
   left: 600px;
   top: 30px;
-  width: 500px;
+  width: 350px;
+}
+
+#step4-risks {
+  top: 480px;
+  left: 20px;
+  width: 800px;
+}
+
+#info-detail {
+  width: 350px;
 }
 
 .bar {

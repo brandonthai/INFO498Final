@@ -16,6 +16,7 @@ $("#submit").click(function() {
 	var active = $("input:radio[name=physical]:checked").val();
 	var height = $("#height").val();
 	var weight = $("#weight").val();
+	var heights = [147.32, 149.86, 152.4, 154.94, 157.48, 160.02, 162.56, 165.1, 167.64, 170.18, 172.72, 175.26, 177.8, 180.34, 182.88, 185.42, 187.96, 190.5, 193.04];
 
 	function dataCheck() {
 		if(age === null || age === undefined) {
@@ -53,18 +54,7 @@ $("#submit").click(function() {
 		score += exercisePoints();
 		score += heightweightpoints(formatWeight, formatHeight);
 
-
-		console.log(heightweightpoints(formatWeight, formatHeight));
-		console.log(yesnoPoints(genstational) + "hello");
-		console.log(agePoints(formatAge) + "hello");
-		console.log(genderPoints());
-
-
 		results(score);
-
-		console.log(score);
-
-
 	}
 
 	function agePoints(age) {
@@ -262,12 +252,63 @@ $("#submit").click(function() {
 
 	function results(score) {
 		$("#score").html("Your risk score is " + score);
+		$("#max").html("Out of a maximum of 10 total points");
 
 		if(score < 5) {
 			$("#risk").html("Your risk level is low");
+			$("#info-detail").html("Congrats, currently you risk for diabetes is low. However please consult a doctor or other health care professional for professional diagnosis and treatment of medical conditions.");
 		} else {
 			$("#risk").html("Your risk level is high");
+			$("#info-detail").html("Currently your risk for diabetes is high and therefore at increased risk for diabetes. Please consult a doctor or other health care professional for professional diagnosis and treatment of medical conditions.");
+		}
+
+		$("#step4-risks").empty();
+
+
+		$("#step4-risks").append("<h3>Your Risks:</h3>");
+
+		if(age !== 0) {
+			$("#step4-risks").append("<li><b>Age:</b> You are at higher risk for diabetes the older you are</li>");
+		}
+		if(gender === "m") {
+			$("#step4-risks").append("<li><b>Gender:</b> Men are more likely than women to have undiagnosed diabetes</li>");
+		}
+		if(dHistory === "y") {
+			$("#step4-risks").append("<li><b>Diabetes History:</b> A family history of diabetes could contribute to your diabetes risk</li>");
+		}
+		if(hbp === "y") {
+			$("#step4-risks").append("<li><b>High Blood Pressure:</b> Having high blood pressure contributes to your overall risk for diabetes</li>");
+		}
+		if(active === "n") {
+			$("#step4-risks").append("<li><b>Physical Activity:</b> Being inactive can increase your risk for diabetes</li>");
+		}
+		if(genstational === "y") {
+			$("#step4-risks").append("<li><b>Gestation Diabetes:</b> Women who have gestational diabetes have an increased risk of developing diabetes</li>");
+		}
+
+		if(heightweightpoints(formatWeight, formatHeight) > 0) {
+
+			var height1 = heights[formatHeight];
+			var weight1 = (formatWeight / 2.2046);
+
+			var finalBmi = weight1/(height1/100*height1/100);
+			$("#step4-risks").append("<li><b>BMI:</b> People with higher BMIs are at a higher risk. Your <i>BMI is " + Math.round(finalBmi) + "</i></li>");
 		}
 	}
 
+	$("#tallied").empty();
+	$("#tallied").append("<h3>How your score was calculated:</h3>");
+	var formatAge1 = Number(age);
+	$("#tallied").append("<li>Age: " + agePoints(formatAge1) + " point(s)</li>");
+	$("#tallied").append("<li>Gender: " + genderPoints() + " point(s)</li>");
+	if(gender === "f") {
+		alert(genstational);
+		$("#tallied").append("<li>Gestation Diabetes: " + yesnoPoints(genstational) + " point(s)</li>");
+	}
+	$("#tallied").append("<li>Diabetes History: " + yesnoPoints(dHistory) + " point(s)</li>");
+	$("#tallied").append("<li>High Blood Pressure: " + yesnoPoints(hbp) + " point(s)</li>");
+	$("#tallied").append("<li>Physical Activity: " + exercisePoints() + " point(s)</li>");
+	var formatHeight2 = Number(height);
+	var formatWeight2 = Number(weight);
+	$("#tallied").append("<li>BMI: " + heightweightpoints(formatWeight2, formatHeight2) + " point(s)</li>");
 });
