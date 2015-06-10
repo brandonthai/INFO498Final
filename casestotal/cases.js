@@ -1,9 +1,3 @@
-var userHeight = 60;
-var userWeight = 100;
-var userSex = "Male";
-
-var userBmi = userWeight / (userHeight * userHeight) * 703;
-
 var margin = {
     top: 20,
     right: 20,
@@ -13,15 +7,15 @@ var margin = {
 var w = 960 - margin.left - margin.right;
 var h = 500 - margin.top - margin.bottom;
 var dataset; //to hold full dataset
-d3.csv("bmiuse.csv", function(error, rates) {
+d3.csv("cases.csv", function(error, rates) {
     //read in the data
     if (error) return console.warn(error);
     rates.forEach(function(d) {
         d.year = d.Year;
-        d.sex = d.Sex;
-        d.average = d.Average;
+        d.cases = d.Cases;
     });
     dataset = rates;
+    console.log(dataset);
     drawVis(dataset);
 });
 
@@ -31,7 +25,7 @@ var svg = d3.select("body").append("svg").attr("width", w + margin.left +
         margin.right).attr("height", h + margin.top + margin.bottom).append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 var x = d3.scale.linear().domain([1975, 2015]).range([0, w]);
-var y = d3.scale.linear().domain([15, 35]).range([h, 0]);
+var y = d3.scale.linear().domain([400000, 1800000]).range([h, 0]);
 var tooltip = d3.select("body").append("div").attr("class", "tooltip").style(
     "opacity", 0);
 var patt = new RegExp("all");
@@ -47,9 +41,9 @@ function drawVis(data) {
         "circle").attr("cx", function(d) {
         return x(d.year);
     }).attr("cy", function(d) {
-        return y(d.average);
+        return y(d.cases);
     }).attr("r", 3).style("fill", function(d) {
-        return col(d.sex);
+        return col(1);
     });
 }
 
