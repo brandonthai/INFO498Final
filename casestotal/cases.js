@@ -1,57 +1,69 @@
-var margin = {
-    top: 20,
-    right: 20,
-    bottom: 30,
-    left: 50
-};
-var w = 960 - margin.left - margin.right;
-var h = 500 - margin.top - margin.bottom;
-var dataset; //to hold full dataset
-d3.csv("cases.csv", function(error, rates) {
-    //read in the data
-    if (error) return console.warn(error);
-    rates.forEach(function(d) {
-        d.year = d.Year;
-        d.cases = d.Cases;
+var margin = {top:0, right:0, bottom:20, left:50},
+    width  = 500,
+    height = 200;
+
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("viewBox", "0 0 " + width + " " + height);
+
+var yScale = d3.scale.linear()
+    .range([height - margin.top - margin.bottom, 0]);
+
+var xScale = d3.scale.ordinal()
+    .rangeRoundBands([0, width - margin.right - margin.left], .1);
+
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left");
+
+d3.csv("cases.csv", function(error, data){
+    data = data.map(function(d){ 
+        d["Cases"] = +d["Cases"];
+        d["Year"] = +d["Year"]; 
+        return d;
     });
-    dataset = rates;
-    console.log(dataset);
-    drawVis(dataset);
-});
+
+    yScale.domain([0, d3.max(data, function(d){ return d["Cases"]; })]);
+
+    xScale.domain(data.map(function(d){ return d["Year"]; }));
+
+    svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d){ return xScale(d["Year"]); })
+        .attr("y", function(d){ return yScale(d["Cases"]); })
+        .attr("height", 0)
+        .attr("width", function(d){ return xScale.rangeBand(); })
+        .transition()
+        .delay(function (d, i) { return i*150; })
+        .attr("y", function(d){ return yScale(d["Cases"]); })
+        .attr("height", function(d){ return height - margin.top - margin.bottom - yScale(d["Cases"]); })
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .call(yAxis);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
+        .call(xAxis);
+
+    yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .tickFormat(d3.format("$,"));
+
+})
 
 
-var col = d3.scale.category20b();
-var svg = d3.select("body").append("svg").attr("width", w + margin.left +
-        margin.right).attr("height", h + margin.top + margin.bottom).append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-var x = d3.scale.linear().domain([1975, 2015]).range([0, w]);
-var y = d3.scale.linear().domain([400000, 1800000]).range([h, 0]);
-var tooltip = d3.select("body").append("div").attr("class", "tooltip").style(
-    "opacity", 0);
-var patt = new RegExp("all");
-
-var line = d3.svg.line().x(function(d) {
-    return x(d.x);
-}).y(function(d) {
-    return y(d.y);
-});
-
-function drawVis(data) {
-    var circles = svg.selectAll("circle").data(data).enter().append(
-        "circle").attr("cx", function(d) {
-        return x(d.year);
-    }).attr("cy", function(d) {
-        return y(d.cases);
-    }).attr("r", 3).style("fill", function(d) {
-        return col(1);
-    });
-}
-
-var xAxis = d3.svg.axis().scale(x).tickFormat(d3.format("d"));
-svg.append("g").attr("class", "axis").attr("transform", "translate(0," + h +
-    ")").call(xAxis).append("text").attr("x", w / 2).attr("y", 35).style(
-    "text-anchor", "middle").text("Year");
-var yAxis = d3.svg.axis().scale(y).orient("left");
-svg.append("g").attr("class", "axis").call(yAxis).append("text").attr(
-    "transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
-    "text-anchor", "end").text("BMI");

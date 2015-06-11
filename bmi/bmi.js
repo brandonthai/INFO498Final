@@ -1,9 +1,3 @@
-var userHeight = 60;
-var userWeight = 100;
-var userSex = "Male";
-
-var userBmi = userWeight / (userHeight * userHeight) * 703;
-
 var margin = {
     top: 20,
     right: 20,
@@ -26,10 +20,39 @@ d3.csv("bmiuse.csv", function(error, rates) {
 });
 
 
-var col = d3.scale.category20b();
+var col = d3.scale.category10();
 var svg = d3.select("body").append("svg").attr("width", w + margin.left +
         margin.right).attr("height", h + margin.top + margin.bottom).append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+    svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "110")
+    .attr("y", "0")
+    .attr("fill", "#FFA7A7")
+    .attr("opacity", ".5");
+
+    svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "120")
+    .attr("y", "110")
+    .attr("fill", "#FFFFD6")
+    .attr("opacity", ".9");
+
+    svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "140")
+    .attr("y", "230")
+    .attr("fill", "#C1E6C3")
+    .attr("opacity", ".5");
+
+    svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "80")
+    .attr("y", "370")
+    .attr("fill", "gray")
+    .attr("opacity", ".2");
+
 var x = d3.scale.linear().domain([1975, 2015]).range([0, w]);
 var y = d3.scale.linear().domain([15, 35]).range([h, 0]);
 var tooltip = d3.select("body").append("div").attr("class", "tooltip").style(
@@ -61,3 +84,33 @@ var yAxis = d3.svg.axis().scale(y).orient("left");
 svg.append("g").attr("class", "axis").call(yAxis).append("text").attr(
     "transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
     "text-anchor", "end").text("BMI");
+
+
+
+var userHeight;
+var userWeight;
+var userSex = "Male";
+
+$("#submit").click(function() {
+    userHeight = $("#uHeight").val();
+    userWeight = $("#uWeight").val();
+
+    var userBmi = userWeight / (userHeight * userHeight) * 703;
+
+
+    svg.append("circle")
+        .attr("cx", function(d) {
+            return x(2015);
+        })
+        .attr("cy", function(d) {
+            return y(userBmi);
+        })
+        .attr("class", "inp")
+        .attr("r", 5)
+        .style("fill", "red")
+})
+
+
+$("#reset").click(function() {
+    svg.selectAll("circle.").remove()
+});
