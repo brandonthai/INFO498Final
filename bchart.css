@@ -28,3 +28,11 @@
   top: 100%;
   left: 0;
 }
+
+.bar.positive {
+  fill: green;
+}
+
+.bar.negative {
+  fill: brown;
+}

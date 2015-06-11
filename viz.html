@@ -38,18 +38,61 @@
       <div id="annotation-steps">
         <div class="annotation-step" id="step1-annotation" style="display:block;">
           <div class="annotation" id="step1-left-annotation" >
+            <h5>Please select 2 or more options</h5>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Option 1</label>
+              <label><input id="one" type="checkbox" value="Nuts">Nuts</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Option 2</label>
+              <label><input id="two" type="checkbox" value="Coffee">Coffee</label>
             </div>
-            <div class="checkbox disabled">
-              <label><input type="checkbox" value="">Option 3</label>
+            <div class="checkbox">
+              <label><input id="three" type="checkbox" value="Rice">Rice</label>
             </div>
+            <div class="checkbox">
+              <label><input id="four" type="checkbox" value="Sugery Drinks">Sugery Drinks</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="five" type="checkbox" value="">Yogurt</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="six" type="checkbox" value="">Brown Rice</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="seven" type="checkbox" value="">Fruit Drinks</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="eight" type="checkbox" value="">3 oz red meat/day</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="nine" type="checkbox" value="">2 Slices of Bacon</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="ten" type="checkbox" value="">Hotdog</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="eleven" type="checkbox" value="">Poultry</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="tweleve" type="checkbox" value="">Fish</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="thirteen" type="checkbox" value="">Fast food</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="fourteen" type="checkbox" value="">Dairy</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="fifteen" type="checkbox" value="">TV(2 hours)</label>
+            </div>
+            <div class="checkbox">
+              <label><input id="sixteen" type="checkbox" value="">Walking(1/2 hour)</label>
+            </div> 
+            <div class="checkbox">
+              <label><input id="seventeen" type="checkbox" value="">Smoking</label>
+            </div>   
           </div>
           <div class="annotation" id="step1-right-annotation" >
-            <h4>Right Annotation Title</h4>
+            <h3>Visualization</h3>
             <p id="barchart"></p>
           </div>
         </div>
@@ -296,17 +339,137 @@
 
 
 
-
-  var data = [["Nuts",0.27], ["coffee",0.11], ["Rice",-0.17], ["Sugary drinks",0.26], ["Yogurt",0.28], ["Brown Rice", 0.11]
+//calls bchart.js
+  var datas = [["Nuts",0.27], ["coffee",0.11], ["Rice",-0.17], ["Sugary drinks",0.26], ["Yogurt",0.27], ["Brown Rice", 0.11]
   , ["Fruit Drinks", -0.31], ["3 oz red meat/day", -0.20], ["2 Slices of Bacon", -0.51], ["Hotdog", -0.51], ["Poultry", 0.35], ["Fish", 0.35], ["Fast Food", -0.27], ["Dairy", 0.23], ["TV(2 hours)", -0.20], ["Walking(1/2 hour per day", 0.30], ["Smoking", -0.50]];
 
-d3.select("#barchart")
-  .datum(data)
-    .call(columnChart()
-      .width(775)
-      .height(450)
-      .x(function(d, i) { return d[0]; })
-      .y(function(d, i) { return d[1]; }));
+$(".checkbox").change(function() {
+  var data = new Array();
+  if($('#one').is(":checked")) {
+      data.push(["Nuts",0.27]);
+  }
+  if($('#two').is(":checked")){
+      data.push(datas[1]);
+  }
+  if($('#three').is(":checked")){
+      data.push(datas[2]);
+  }
+  if($('#four').is(":checked")){
+      data.push(datas[3]);
+  }
+  if($('#five').is(":checked")){
+      data.push(datas[4]);
+  }
+  if($('#six').is(":checked")){
+      data.push(datas[5]);
+  }
+  if($('#seven').is(":checked")){
+      data.push(datas[6]);
+  }
+  if($('#eight').is(":checked")){
+      data.push(datas[7]);
+  }
+  if($('#nine').is(":checked")){
+      data.push(datas[8]);
+  }
+  if($('#ten').is(":checked")){
+      data.push(datas[9]);
+  }
+  if($('#eleven').is(":checked")){
+      data.push(datas[10]);
+  }
+  if($('#tweleve').is(":checked")){
+      data.push(datas[11]);
+  }
+  if($('#thirteen').is(":checked")){
+      data.push(datas[12]);
+  }
+  if($('#fourteen').is(":checked")){
+      data.push(datas[13]);
+  }
+  if($('#fifteen').is(":checked")){
+      data.push(datas[14]);
+  }
+  if($('#sixteen').is(":checked")){
+      data.push(datas[15]);
+  }
+  if($('#seventeen').is(":checked")){
+      data.push(datas[16]);
+  } 
+  console.log(data);
+  var n = $("input:checkbox:checked").length;
+  if( n > 1) {
+    d3.select("#barchart")
+    .datum(data)
+      .call(columnChart()
+        .width(775)
+        .height(450)
+        .x(function(d, i) { return d[0]; })
+        .y(function(d, i) { return d[1]; }));
+  }
+});
+
+// $("#bcharting").click(function() {
+//   if($('#one').is(":checked")) {
+//       data.push(["Nuts",0.27]);
+//   }
+//   if($('#two').is(":checked")){
+//       data.push(datas[1]);
+//   }
+//   if($('#three').is(":checked")){
+//       data.push(datas[2]);
+//   }
+//   if($('#four').is(":checked")){
+//       data.push(datas[3]);
+//   }
+//   if($('#five').is(":checked")){
+//       data.push(datas[4]);
+//   }
+//   if($('#six').is(":checked")){
+//       data.push(datas[5]);
+//   }
+//   if($('#seven').is(":checked")){
+//       data.push(datas[6]);
+//   }
+//   if($('#eight').is(":checked")){
+//       data.push(datas[7]);
+//   }
+//   if($('#nine').is(":checked")){
+//       data.push(datas[8]);
+//   }
+//   if($('#ten').is(":checked")){
+//       data.push(datas[9]);
+//   }
+//   if($('#eleven').is(":checked")){
+//       data.push(datas[10]);
+//   }
+//   if($('#twelve').is(":checked")){
+//       data.push(datas[11]);
+//   }
+//   if($('#thirteen').is(":checked")){
+//       data.push(datas[12]);
+//   }
+//   if($('#fourteen').is(":checked")){
+//       data.push(datas[13]);
+//   }
+//   if($('#fifteen').is(":checked")){
+//       data.push(datas[14]);
+//   }
+//   if($('#sixteen').is(":checked")){
+//       data.push(datas[15]);
+//   }
+//   if($('#seventeen').is(":checked")){
+//       data.push(datas[16]);
+//   } 
+//   console.log(data);
+//   d3.select("#barchart")
+//     .datum(data)
+//       .call(columnChart()
+//         .width(775)
+//         .height(450)
+//         .x(function(d, i) { return d[0]; })
+//         .y(function(d, i) { return d[1]; }));
+// });
 
 //Page 2
     var margin = {top: 20, right: 20, bottom: 30, left: 0},
