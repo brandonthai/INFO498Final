@@ -30,9 +30,9 @@
 }
 
 .bar.positive {
-  fill: green;
+  fill: brown;
 }
 
 .bar.negative {
-  fill: brown;
+  fill: green;
 }
