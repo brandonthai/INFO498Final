@@ -1,28 +1,18 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-  <title>Accessing Diabetes</title>
-  <meta name="author" content="Jim Vallandingham">
-  <meta name="description" content="">
-
+  <title>Diabetes Risks Interactive Data Visualizations & Tool</title>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/stepper.css">
-   <link rel="stylesheet" href="bchart.css">
-    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="css/bchart.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="bchart.js"></script>
-
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -31,9 +21,9 @@
 </head>
 <body>
   <div id="container">
-    <h1>What you need to know about diabetes?</h1>
+    <h1>Diabetes Risks Interactive Data Visualizations & Tool</h1>
     <div id="vis-nav">
-      <a href="#" id="step1" class="step-link active" class="btn btn-default">Cases</a>
+      <a href="#" id="step1" class="step-link active" class="btn btn-default">Number of Cases</a>
       <a href="#" id="step2" class="step-link" class="btn btn-default">Lifestyle Effects</a>
       <a href="#" id="step3" class="step-link" class="btn btn-default">Blood Pressure Level</a>
       <a href="#" id="step4" class="step-link" class="btn btn-default">Risk Calculator</a>
@@ -43,13 +33,14 @@
     </div>
     <div id="vis-container">
       <div id="annotation-steps">
+
          <div class="annotation-step" id="step1-annotation" style="display:block;">
           <div class="annotation" id="step1-center-annotation" >
             <div id="t2"></div>
-            <p>Here is the annotation text for the center annotation of step 2.<br/> 
-              We are using absolute positioning of these divs</p>
+            <small>Source: http://www.cdc.gov/diabetes/home/index.html</small>
           </div>
         </div>
+
         <div class="annotation-step" id="step2-annotation">
           <div class="annotation" id="step2-left-annotation" >
             <h5>Select 2 or more options</h5>
@@ -252,6 +243,8 @@
       <div id="vis-canvas"></div>
     </div>
   </div>
+  
+  <script src="js/bchart.js"></script>
   <script src="js/riskCalc.js"></script>
   <script src="js/stepper.js"></script>
   <script src="js/lifestyle.js"></script>

@@ -6,7 +6,7 @@ var datas = [
     ["Yogurt", -0.27, "Ongoing research shows that the probiotics in yogurt reduces intestinal inflammation and regulates appetite control"],
     ["Brown Rice", 0.11, "Brown rice helps stabilizes blood sugar levels. Consuming 1/2 cup of rice daily to experience the health benefits"],
     ["Fruit Drinks", -0.31, "Processed sugar and high fructose corn syrups are the worst drinks for you health. Hydrate yourselves with water!"], 
-    ["Red Meat (3 oz)", 0.20, "Too much red meat can increase the risk of developing Type II Diabetes by 48 percent"], 
+    ["Red Meat (3 oz)", 0.20, "Too much red meat can increase the risk of developing Type II Diabetes by 20 percent"], 
     ["Bacon (2 slices)", 0.51, "Bacon provides excessive calories with little or no nutrition"], 
     ["Hot Dog", 0.51, "Similar to bacon, fatty foods and processed meats provide no nutritional value to your diet"], 
     ["Poultry", 0.35, "Poultry is a versatile, lean protein product"], 
@@ -20,7 +20,7 @@ var datas = [
 $(".checkbox").change(function() {
   var data = new Array();
   if($('#one').is(":checked")) {
-      data.push(["Nuts",-0.27]);
+      data.push(["Nuts",-0.27, "Nuts will lower your glycemic index, which is a measurement of how fast your body absorbs certain carbohydrates"]);
   }
   if($('#two').is(":checked")){
       data.push(datas[1]);
