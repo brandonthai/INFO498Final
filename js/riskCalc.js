@@ -37,6 +37,9 @@ $("#submit").click(function() {
 	}
 
 	if(dataCheck()) {
+
+		$("#errorMessage").empty();
+		
 		var formatAge = Number(age);
 		var formatHeight = Number(height);
 		var formatWeight = Number(weight);
@@ -55,6 +58,21 @@ $("#submit").click(function() {
 		score += heightweightpoints(formatWeight, formatHeight);
 
 		results(score);
+
+		$("#tallied").empty();
+		$("#tallied").append("<h3>How your score was calculated:</h3>");
+		var formatAge1 = Number(age);
+		$("#tallied").append("<li>Age: " + agePoints(formatAge1) + " point(s)</li>");
+		$("#tallied").append("<li>Gender: " + genderPoints() + " point(s)</li>");
+		if(gender === "f") {
+			$("#tallied").append("<li>Gestation Diabetes: " + yesnoPoints(genstational) + " point(s)</li>");
+		}
+		$("#tallied").append("<li>Diabetes History: " + yesnoPoints(dHistory) + " point(s)</li>");
+		$("#tallied").append("<li>High Blood Pressure: " + yesnoPoints(hbp) + " point(s)</li>");
+		$("#tallied").append("<li>Physical Activity: " + exercisePoints() + " point(s)</li>");
+		var formatHeight2 = Number(height);
+		var formatWeight2 = Number(weight);
+		$("#tallied").append("<li>BMI: " + heightweightpoints(formatWeight2, formatHeight2) + " point(s)</li>");
 	}
 
 	function agePoints(age) {
@@ -267,7 +285,7 @@ $("#submit").click(function() {
 
 		$("#step4-risks").append("<h3>Your Risks:</h3>");
 
-		if(age !== 0) {
+		if(age > 0) {
 			$("#step4-risks").append("<li><b>Age:</b> You are at higher risk for diabetes the older you are</li>");
 		}
 		if(gender === "m") {
@@ -296,19 +314,4 @@ $("#submit").click(function() {
 		}
 	}
 
-	$("#tallied").empty();
-	$("#tallied").append("<h3>How your score was calculated:</h3>");
-	var formatAge1 = Number(age);
-	$("#tallied").append("<li>Age: " + agePoints(formatAge1) + " point(s)</li>");
-	$("#tallied").append("<li>Gender: " + genderPoints() + " point(s)</li>");
-	if(gender === "f") {
-		alert(genstational);
-		$("#tallied").append("<li>Gestation Diabetes: " + yesnoPoints(genstational) + " point(s)</li>");
-	}
-	$("#tallied").append("<li>Diabetes History: " + yesnoPoints(dHistory) + " point(s)</li>");
-	$("#tallied").append("<li>High Blood Pressure: " + yesnoPoints(hbp) + " point(s)</li>");
-	$("#tallied").append("<li>Physical Activity: " + exercisePoints() + " point(s)</li>");
-	var formatHeight2 = Number(height);
-	var formatWeight2 = Number(weight);
-	$("#tallied").append("<li>BMI: " + heightweightpoints(formatWeight2, formatHeight2) + " point(s)</li>");
 });
