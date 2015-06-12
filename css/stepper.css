@@ -17,8 +17,7 @@ a.step-link:hover, a.active {
 
 #container{
   margin: auto;
-  padding-top: 20px;
-  width: 980px;
+  padding: 20px;
 }
 
 /* Here is our relatively positioned
@@ -26,7 +25,6 @@ a.step-link:hover, a.active {
  * visualization */
 #vis-container {
   position: relative;
-  width: 980px;
   height: 700px;
   margin-top: 10px;
 }
