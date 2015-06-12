@@ -1,4 +1,21 @@
-var datas = [["Nuts", -0.27], ["Coffee", -0.11], ["White Rice", 0.17], ["Sugary Drinks", 0.26], ["Yogurt", -0.27], ["Brown Rice", 0.11], ["Fruit Drinks", -0.31], ["Red Meat (3 oz)", 0.20], ["Bacon (2 slices)", 0.51], ["Hot Dog", 0.51], ["Poultry", 0.35], ["Fish", -0.35], ["Fast Food", 0.27], ["Dairy", -0.23], ["TV (2 hours)", 0.20], ["Walking (1/2 hour)", -0.30], ["Smoking", 0.50]];
+var datas = [
+    ["Nuts", -0.27, "Nuts will lower your glycemic index, which is a measurement of how fast your body absorbs certain carbohydrates"], 
+    ["Coffee", -0.11, "There is ongoing research that the caffeine in coffee may increase insulin resistence"],
+    ["White Rice", 0.17, "White rice has a high glycemic index and cause your blood sugar levels to peak quicker than other carbohydrates"],
+    ["Sugary Drinks", 0.26, "These drinks are not only bad for your diabetes but for general health. Too much sugar!"],
+    ["Yogurt", -0.27, "Ongoing research shows that the probiotics in yogurt reduces intestinal inflammation and regulates appetite control"],
+    ["Brown Rice", 0.11, "Brown rice helps stabilizes blood sugar levels. Consuming 1/2 cup of rice daily to experience the health benefits"],
+    ["Fruit Drinks", -0.31, "Processed sugar and high fructose corn syrups are the worst drinks for you health. Hydrate yourselves with water!"], 
+    ["Red Meat (3 oz)", 0.20, "Too much red meat can increase the risk of developing Type II Diabetes by 48 percent"], 
+    ["Bacon (2 slices)", 0.51, "Bacon provides excessive calories with little or no nutrition"], 
+    ["Hot Dog", 0.51, "Similar to bacon, fatty foods and processed meats provide no nutritional value to your diet"], 
+    ["Poultry", 0.35, "Poultry is a versatile, lean protein product"], 
+    ["Fish", -0.35, "A low source of unhealthy saturated fats, cholesterol, and plenty of omega-3 fatty acids"], 
+    ["Fast Food", 0.27, "McDonalds, need I say more?"],
+    ["Dairy", -0.23, "Similar to yogurt, the probiotics kick in to increase your insulin levels"], 
+    ["TV (2 hours)", 0.20, "Sitting on the couch all day means no calories are burned"], 
+    ["Walking (1/2 hour)", -0.30, "An easy excercise easy on the joints and effective in lowering your blood sugar levels"], 
+    ["Smoking", 0.50, "Smoking not only affects Type II Diabetes but can lead to Heart and kidney disease and Retionopathy (blindness)"]];
 
 $(".checkbox").change(function() {
   var data = new Array();
