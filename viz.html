@@ -23,6 +23,11 @@
 <script type="text/javascript" src="bchart.js"></script>
 
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 </head>
 <body>
   <div id="container">
@@ -103,12 +108,20 @@
             <p id="test" ></p>
           </div>
         </div>
+
         <div class="annotation-step" id="step3-annotation">
           <div class="annotation" id="step3-high-annotation" style="width: 600px;">
+            <label>Select Range of Blood Pressure Level: &nbsp;</label>
+            <p id="amount" style="border: 0; color: #f6931f; font-weight: bold;">
+            <div id="slider-range"></div>
+            <br>
+            <br>
             <h4>Age vs. Blood Pressure</h4>
             <p>Showing the visualization between how old you are and your blood pressure level.</p>
-          </div>
-          <p id="scatter" style="padding-top: 7em;"></p>
+            <div id="scatter">
+              <!-- <script type="text/javascript" src="js/chart3.js"></script> -->
+            </div>            
+          </div>                    
         </div>
 
         <div class="annotation-step" id="step4-annotation">
@@ -239,103 +252,137 @@
 
   <script>
 
+  var dataset;
+
   var bp_margin = {top: 20, right: 20, bottom: 30, left: 40},
-    bp_width = 960 - bp_margin.left - bp_margin.right,
-    bp_height = 500 - bp_margin.top - bp_margin.bottom;
+      bp_width = 960 - bp_margin.left - bp_margin.right,
+      bp_height = 500 - bp_margin.top - bp_margin.bottom;
 
-    // setup x 
-    var bp_xValue = function(d) { return d.age;}, // data -> value
-        bp_xScale = d3.scale.linear().range([0, bp_width]), // value -> display
-        bp_xMap = function(d) { return bp_xScale(bp_xValue(d));}, // data -> display
-        bp_xAxis = d3.svg.axis().scale(bp_xScale).orient("bottom");
+  // setup x 
+  var bp_xValue = function(d) { return d.age;}, // data -> value
+      bp_xScale = d3.scale.linear().range([0, bp_width]), // value -> display
+      bp_xMap = function(d) { return bp_xScale(bp_xValue(d));}, // data -> display
+      bp_xAxis = d3.svg.axis().scale(bp_xScale).orient("bottom");
 
-    // setup y
-    var bp_yValue = function(d) { return d.blood_pressure;}, // data -> value
-        bp_yScale = d3.scale.linear().range([bp_height, 0]), // value -> display
-        bp_yMap = function(d) { return bp_yScale(bp_yValue(d));}, // data -> display
-        bp_yAxis = d3.svg.axis().scale(bp_yScale).orient("left");
+  // setup y
+  var bp_yValue = function(d) { return d.blood_pressure;}, // data -> value
+      bp_yScale = d3.scale.linear().range([bp_height, 0]), // value -> display
+      bp_yMap = function(d) { return bp_yScale(bp_yValue(d));}, // data -> display
+      bp_yAxis = d3.svg.axis().scale(bp_yScale).orient("left");
 
-    // setup fill color
-    var bp_cValue = function(d) { return d.blood_pressure;},
-        bp_color = d3.scale.category10();
+  // setup fill color
+  var bp_cValue = function(d) { return d.blood_pressure;},
+      bp_color = d3.scale.category10();
 
-    // add the graph canvas to the body of the webpage
-    var bp_svg = d3.select("#scatter").append("svg")
-        .attr("width", bp_width + bp_margin.left + bp_margin.right)
-        .attr("height", bp_height + bp_margin.top + bp_margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + bp_margin.left + "," + bp_margin.top + ")");
+  // add the graph canvas to the body of the webpage
+  var bp_svg = d3.select("#scatter").append("svg")
+      .attr("width", bp_width + bp_margin.left + bp_margin.right)
+      .attr("height", bp_height + bp_margin.top + bp_margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + bp_margin.left + "," + bp_margin.top + ")");
 
-    // add the tooltip area to the webpage
-    var bp_tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
+  // add the tooltip area to the webpage
+  var bp_tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
-    d3.csv("diabetes.csv", function(error, data) {
-      // change string (from CSV) into number format
-      data.forEach(function(d) {
-        d.pregnancies = +d.pregnancies;
-        d.plasma_glucose = +d.plasma_glucose;
-        d.blood_pressure = +d.blood_pressure;
-        d.triceps_skin_thickness = +d.triceps_skin_thickness;
-        d.insulin = +d.insulin;
-        d.bmi = +d.bmi;
-        d.diabetes_pedigree = +d.diabetes_pedigree;
-        d.age = +d.age;
-      });
+  // x-axis
+  bp_svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + bp_height + ")")
+      .call(bp_xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", bp_width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Age");
 
-      // don't want dots overlapping axis, so add in buffer to data domain
-      bp_xScale.domain([d3.min(data, bp_xValue)-1, d3.max(data, bp_xValue)+1]);
-      bp_yScale.domain([d3.min(data, bp_yValue)-1, d3.max(data, bp_yValue)+1]);
+  // y-axis
+  bp_svg.append("g")
+      .attr("class", "y axis")
+      .call(bp_yAxis)
+      .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Blood Pressure Level");
 
-      // x-axis
-      bp_svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + bp_height + ")")
-          .call(bp_xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", bp_width)
-          .attr("y", -6)
-          .style("text-anchor", "end")
-          .text("Age");
-
-      // y-axis
-      bp_svg.append("g")
-          .attr("class", "y axis")
-          .call(bp_yAxis)
-          .append("text")
-          .attr("class", "label")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("Blood Pressure Level");
-
-      // draw dots
-      bp_svg.selectAll(".dot")
-          .data(data)
-          .enter().append("circle")
-          .attr("class", "dot")
-          .attr("r", 3.5)
-          .attr("cx", bp_xMap)
-          .attr("cy", bp_yMap)
-          .style("fill", function(d) { return bp_color(bp_cValue(d));}) 
-          .on("mouseover", function(d) {
-              bp_tooltip.transition()
-                   .duration(200)
-                   .style("opacity", .9);
-              bp_tooltip.html("Person" + "<br/> (" + "Age: " + bp_xValue(d) 
-              + ", " + "BP: " + bp_yValue(d) + ")")
-                   .style("left", (d3.event.pageX + 5) + "px")
-                   .style("top", (d3.event.pageY - 28) + "px");
-          })
-          .on("mouseout", function(d) {
-              bp_tooltip.transition()
-                   .duration(500)
-                   .style("opacity", 0);
-          });  
+  d3.csv("diabetes.csv", function(error, data) {
+    data.forEach(function(d) {
+      d.pregnancies = +d.pregnancies;
+      d.plasma_glucose = +d.plasma_glucose;
+      d.blood_pressure = +d.blood_pressure;
+      d.triceps_skin_thickness = +d.triceps_skin_thickness;
+      d.insulin = +d.insulin;
+      d.bmi = +d.bmi;
+      d.diabetes_pedigree = +d.diabetes_pedigree;
+      d.age = +d.age;
     });
+
+    // don't want dots overlapping axis, so add in buffer to data domain
+    bp_xScale.domain([d3.min(data, bp_xValue)-1, d3.max(data, bp_xValue)+1]);
+    bp_yScale.domain([d3.min(data, bp_yValue)-1, d3.max(data, bp_yValue)+1]);
+
+    dataset = data;
+    drawGraph(data);
+  });  
+
+  function updateRange(first, second) {
+      var newData = dataset.filter(function(d) {
+        return d.blood_pressure >= first && d.blood_pressure <= second
+      });
+      drawGraph(newData);  
+  }  
+
+  function updateGraph(data) {
+    var newData = dataset.filter(function(d) { return d.blood_pressure >= first && d.blood_pressure <= second });
+    drawGraph(newData);  
+  }
+
+  $(function() {
+      $("#slider-range").slider({
+        range: true,
+        min: 0,
+        max: 150,
+        values: [50, 100],
+        slide: function( event, ui ) {
+            $("#amount").text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            updateRange(ui.values[ 0 ], ui.values[ 1 ]);
+        }
+      });
+  }); 
+
+  function drawGraph(data) {
+    console.log(data);
+    d3.selectAll("circle").remove();    
+
+    // draw dots
+    bp_svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "dot")
+        .attr("r", 3.5)
+        .attr("cx", bp_xMap)
+        .attr("cy", bp_yMap)
+        .style("fill", "red") 
+        .on("mouseover", function(d) {
+            bp_tooltip.transition()
+                 .duration(200)
+                 .style("opacity", .9);
+            bp_tooltip.html("Person" + "<br/> (" + "Age: " + bp_xValue(d) 
+            + ", " + "BP: " + bp_yValue(d) + ")")
+                 .style("left", (d3.event.pageX + 5) + "px")
+                 .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            bp_tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0);
+        });
+  };
 
 
 
