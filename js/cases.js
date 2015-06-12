@@ -1,8 +1,8 @@
-var margin = {top:0, right:0, bottom:20, left:50},
+var margin = {top:10, right:0, bottom:20, left:50},
     width  = 500,
     height = 200;
 
-var svg = d3.select("body")
+var svg = d3.select("#t2")
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -22,7 +22,7 @@ var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient("left");
 
-d3.csv("cases.csv", function(error, data){
+d3.csv("data/cases.csv", function(error, data){
     data = data.map(function(d){ 
         d["Cases"] = +d["Cases"];
         d["Year"] = +d["Year"]; 

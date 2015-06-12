@@ -1,4 +1,4 @@
-function columnChart() {
+  function columnChart() {
   var margin = {top: 30, right: 10, bottom: 120, left: 50},
       width = 420,
       height = 420,

@@ -33,18 +33,25 @@
   <div id="container">
     <h1>What you need to know about diabetes?</h1>
     <div id="vis-nav">
-      <a href="#" id="step1" class="step-link active" class="btn btn-default">Lifestyle Effects</a>
-      <a href="#" id="step2" class="step-link" class="btn btn-default">Step2</a>
-      <a href="#" id="step3" class="step-link" class="btn btn-default">Step3</a>
-      <a href="#" id="step4" class="step-link" class="btn btn-default">Step4</a>
+      <a href="#" id="step1" class="step-link active" class="btn btn-default">Cases</a>
+      <a href="#" id="step2" class="step-link" class="btn btn-default">Lifestyle Effects</a>
+      <a href="#" id="step3" class="step-link" class="btn btn-default">Blood Pressure Level</a>
+      <a href="#" id="step4" class="step-link" class="btn btn-default">Risk Calculator</a>
       <a href="glucosetool/index.html" id="step5" class="step-link" class="btn btn-default">Visualizing Glucose Levels</a>
 
 
     </div>
     <div id="vis-container">
       <div id="annotation-steps">
-        <div class="annotation-step" id="step1-annotation" style="display:block;">
-          <div class="annotation" id="step1-left-annotation" >
+         <div class="annotation-step" id="step1-annotation" style="display:block;">
+          <div class="annotation" id="step1-center-annotation" >
+            <div id="t2"></div>
+            <p>Here is the annotation text for the center annotation of step 2.<br/> 
+              We are using absolute positioning of these divs</p>
+          </div>
+        </div>
+        <div class="annotation-step" id="step2-annotation">
+          <div class="annotation" id="step2-left-annotation" >
             <h5>Select 2 or more options</h5>
             <h4>Which of the following foods do you eat?</h4>
             <div class="checkbox">
@@ -100,15 +107,10 @@
               <label><input id="seventeen" type="checkbox" value="">Smoking</label>
             </div>   
           </div>
-          <div class="annotation" id="step1-right-annotation" >
+          <div class="annotation" id="step2-right-annotation" >
+            <h4>Your lifestyle affects your risk of having diabetes. </h4>
+            <h5>Things that increase your risk are displayed in red and things that decrease your risk are displayed in green on the bar chart.</h5>
             <p id="barchart"></p>
-          </div>
-        </div>
-        <div class="annotation-step" id="step2-annotation">
-          <div class="annotation" id="step2-center-annotation" >
-            <p>Here is the annotation text for the center annotation of step 2.<br/> 
-              We are using absolute positioning of these divs</p>
-            <p id="test" ></p>
           </div>
         </div>
 
@@ -254,5 +256,5 @@
   <script src="js/stepper.js"></script>
   <script src="js/lifestyle.js"></script>
   <script src="js/pressure.js"></script>
-  
+  <script src="js/cases.js"></script>  
 </body>

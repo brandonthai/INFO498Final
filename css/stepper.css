@@ -64,22 +64,22 @@ a.step-link:hover, a.active {
   position: absolute;
 }
 
-#step1-left-annotation {
+#step2-left-annotation {
   left: 30px;
   top: 0px;
   width: 200px;
 }
  
-#step1-right-annotation {
-  left: 200px;
+#step2-right-annotation {
+  left: 270px;
   top: 0px;
-  width: 200px;
+  width: 500px;
 }
 
-#step2-center-annotation {
+#step1-center-annotation {
   left: 290px;
   top: 40px;
-  width: 400px;
+  width:  800px;
   text-align: center;
 }
 
