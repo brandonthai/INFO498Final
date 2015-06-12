@@ -1,5 +1,5 @@
-var margin = {top:10, right:0, bottom:20, left:50},
-    width  = 500,
+var margin = {top:0, right:0, bottom:40, left:100},
+    width  = 700,
     height = 200;
 
 var svg = d3.select("#t2")
@@ -52,18 +52,32 @@ d3.csv("data/cases.csv", function(error, data){
     svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .call(yAxis);
+        .call(yAxis)
+            .append('text')
+            .attr('text-anchor', 'end')
+            .attr('y', 10)
+            .attr('transform', 'rotate(-90)')
+            .text('# of new cases');
 
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
-        .call(xAxis);
+        .call(xAxis)
+        // .append('text')
+        //     .attr('text-anchor', 'end')
+        //     .attr('x', 10)
+        //     .text('# of new cases')
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .tickFormat(d3.format("$,"));
-
 })
 
 

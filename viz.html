@@ -21,7 +21,7 @@
 </head>
 <body>
   <div id="container">
-    <h1>Diabetes Risks Interactive Data Visualizations & Tool</h1>
+    <a href="/index.html"><h1>Diabetes Risks Interactive Data Visualizations & Tool</h1></a>
     <div id="vis-nav">
       <a href="#" id="step1" class="step-link active" class="btn btn-default">Number of Cases</a>
       <a href="#" id="step2" class="step-link" class="btn btn-default">Lifestyle Effects</a>
@@ -35,9 +35,16 @@
       <div id="annotation-steps">
 
          <div class="annotation-step" id="step1-annotation" style="display:block;">
+          <div id="step1-left-annotation" style="margin-top: 50px">
+          <h5>From 1980 through 2013, the number of adults in the United States aged 18–79 with newly diagnosed diabetes more than tripled from 493,000 in 1980 to over 1.4 million in 2013. The number of new cases of diabetes has increased since the early 1990s through 2000s. After 2009, the number of cases has changed little.</h5>
+
+
+                      <small>Source: http://www.cdc.gov/diabetes/home/index.html</small>
+
+        </div>
           <div class="annotation" id="step1-center-annotation" >
+            <h4>Number of New Cases of Diagnosed Diabetes Among Adults from 1980–2013</h4>
             <div id="t2"></div>
-            <small>Source: http://www.cdc.gov/diabetes/home/index.html</small>
           </div>
         </div>
 
@@ -243,7 +250,7 @@
       <div id="vis-canvas"></div>
     </div>
   </div>
-  
+
   <script src="js/bchart.js"></script>
   <script src="js/riskCalc.js"></script>
   <script src="js/stepper.js"></script>
