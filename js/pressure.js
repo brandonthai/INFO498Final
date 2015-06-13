@@ -88,18 +88,18 @@
     drawGraph(newData);  
   }
 
-  $(function() {
-      $("#slider-range").slider({
-        range: true,
-        min: 0,
-        max: 150,
-        values: [0, 150],
-        slide: function( event, ui ) {
-            $("#amount").text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-            updateRange(ui.values[ 0 ], ui.values[ 1 ]);
-        }
-      });
-  }); 
+  // $(function() {
+  //     $("#slider-range").slider({
+  //       range: true,
+  //       min: 0,
+  //       max: 150,
+  //       values: [0, 150],
+  //       slide: function( event, ui ) {
+  //           $("#amount").text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+  //           updateRange(ui.values[ 0 ], ui.values[ 1 ]);
+  //       }
+  //     });
+  // }); 
 
   function drawGraph(data) {
     d3.selectAll("circle").remove();    
