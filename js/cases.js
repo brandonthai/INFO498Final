@@ -2,7 +2,7 @@ var margin = {top:0, right:0, bottom:40, left:100},
     width  = 700,
     height = 200;
 
-var svg = d3.select("#t2")
+var c_svg = d3.select("#t2")
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
@@ -33,7 +33,7 @@ d3.csv("data/cases.csv", function(error, data){
 
     xScale.domain(data.map(function(d){ return d["Year"]; }));
 
-    svg.append("g")
+    c_svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .selectAll(".bar")
         .data(data)
@@ -44,12 +44,28 @@ d3.csv("data/cases.csv", function(error, data){
         .attr("y", function(d){ return yScale(d["Cases"]); })
         .attr("height", 0)
         .attr("width", function(d){ return xScale.rangeBand(); })
+                .on("mouseover", function(d) {
+            c_svg.append("line")
+            .attr("x1", 100)
+            .attr("x2", 700)
+            .attr("y1", yScale(d["Cases"]))
+            .attr("y2", yScale(d["Cases"]))
+            .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .style("stroke", "blue")
+                    .style("z-index", "100")
+        })
+        .on("mouseout", function(d) {
+          c_svg.selectAll("line").remove()
+            
+        })
         .transition()
         .delay(function (d, i) { return i*150; })
         .attr("y", function(d){ return yScale(d["Cases"]); })
         .attr("height", function(d){ return height - margin.top - margin.bottom - yScale(d["Cases"]); })
 
-    svg.append("g")
+
+    c_svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .call(yAxis)
@@ -59,7 +75,7 @@ d3.csv("data/cases.csv", function(error, data){
             .attr('transform', 'rotate(-90)')
             .text('# of new cases');
 
-    svg.append("g")
+    c_svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
         .call(xAxis)

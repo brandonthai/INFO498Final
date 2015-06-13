@@ -2,17 +2,17 @@
 
   var bp_margin = {top: 20, right: 20, bottom: 30, left: 40},
       bp_width = 960 - bp_margin.left - bp_margin.right,
-      bp_height = 500 - bp_margin.top - bp_margin.bottom;
+      bp_height = 450 - bp_margin.top - bp_margin.bottom;
 
   // setup x 
   var bp_xValue = function(d) { return d.age;}, // data -> value
-      bp_xScale = d3.scale.linear().range([0, bp_width]), // value -> display
+      bp_xScale = d3.scale.linear().domain([21, 70]).range([0, bp_width]), // value -> display
       bp_xMap = function(d) { return bp_xScale(bp_xValue(d));}, // data -> display
       bp_xAxis = d3.svg.axis().scale(bp_xScale).orient("bottom");
 
   // setup y
   var bp_yValue = function(d) { return d.blood_pressure;}, // data -> value
-      bp_yScale = d3.scale.linear().range([bp_height, 0]), // value -> display
+      bp_yScale = d3.scale.linear().domain([30, 114]).range([bp_height, 0]), // value -> display
       bp_yMap = function(d) { return bp_yScale(bp_yValue(d));}, // data -> display
       bp_yAxis = d3.svg.axis().scale(bp_yScale).orient("left");
 
@@ -93,7 +93,7 @@
         range: true,
         min: 0,
         max: 150,
-        values: [50, 100],
+        values: [0, 150],
         slide: function( event, ui ) {
             $("#amount").text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
             updateRange(ui.values[ 0 ], ui.values[ 1 ]);
@@ -102,7 +102,6 @@
   }); 
 
   function drawGraph(data) {
-    console.log(data);
     d3.selectAll("circle").remove();    
 
     // draw dots
@@ -115,15 +114,35 @@
         .attr("cy", bp_yMap)
         .style("fill", "red") 
         .on("mouseover", function(d) {
+            bp_svg.append("line")
+            .attr("x1", 0)
+            .attr("x2", bp_xMap(d))
+            .attr("y1", bp_yMap(d))
+            .attr("y2", bp_yMap(d))
+            .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .style("stroke", "blue")
+                    .style("z-index", "100")
+            bp_svg.append("line")
+            .attr("x1", bp_xMap(d))
+            .attr("x2", bp_xMap(d))
+            .attr("y1", bp_height)
+            .attr("y2", bp_yMap(d))
+            .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .style("stroke", "blue")
+                    .style("z-index", "100")
             bp_tooltip.transition()
                  .duration(200)
                  .style("opacity", .9);
-            bp_tooltip.html("Person" + "<br/> (" + "Age: " + bp_xValue(d) 
-            + ", " + "BP: " + bp_yValue(d) + ")")
-                 .style("left", (d3.event.pageX + 5) + "px")
-                 .style("top", (d3.event.pageY - 28) + "px");
+            bp_tooltip.html("Age: " + bp_xValue(d) 
+            + "<br>" + "Blood Pressure: " + bp_yValue(d))
+                 .style("left", (d3.event.pageX + 10) + "px")
+                 .style("top", (d3.event.pageY - 28) + "px")
+                 .style("background-color: red")
         })
         .on("mouseout", function(d) {
+          bp_svg.selectAll("line").remove()
             bp_tooltip.transition()
                  .duration(500)
                  .style("opacity", 0);

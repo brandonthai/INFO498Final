@@ -11,7 +11,7 @@ var datas = [
     ["Hot Dog", 0.51, "Similar to bacon, fatty foods and processed meats provide no nutritional value to your diet"], 
     ["Poultry", 0.35, "Poultry is a versatile, lean protein product"], 
     ["Fish", -0.35, "A low source of unhealthy saturated fats, cholesterol, and plenty of omega-3 fatty acids"], 
-    ["Fast Food", 0.27, "McDonalds, need I say more?"],
+    ["Fast Food", 0.27, "An average fast-food meal can run as high as 1,000 calories or more, and raise your blood sugar above your target range"],
     ["Dairy", -0.23, "Similar to yogurt, the probiotics kick in to increase your insulin levels"], 
     ["TV (2 hours)", 0.20, "Sitting on the couch all day means no calories are burned"], 
     ["Walking (1/2 hour)", -0.30, "An easy excercise easy on the joints and effective in lowering your blood sugar levels"], 

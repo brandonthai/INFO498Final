@@ -144,8 +144,10 @@ a.step-link:hover, a.active {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
+.axis.bye path {
   display: none;
 }
 
-
+.axis.bye line {
+  display: none;
+}

@@ -5,6 +5,7 @@
       xRoundBands = 0.2,
       xValue = function(d) { return d[0]; },
       yValue = function(d) { return d[1]; },
+      desc = function(d) { return d[2];},
       xScale = d3.scale.ordinal(),
       yScale = d3.scale.linear(),
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
@@ -17,7 +18,7 @@
       // Convert data to standard representation greedily;
       // this is needed for nondeterministic accessors.
       data = data.map(function(d, i) {
-        return [xValue.call(data, d, i), yValue.call(data, d, i)];
+        return [xValue.call(data, d, i), yValue.call(data, d, i), desc.call(data, d, i)];
       });
     
       // Update the x-scale.
@@ -40,7 +41,7 @@
       var gEnter = svg.enter().append("svg").append("g");
       gEnter.append("g").attr("class", "bars");
       gEnter.append("g").attr("class", "y axis");
-      gEnter.append("g").attr("class", "x axis");
+      gEnter.append("g").attr("class", "x axis bye");
       gEnter.append("g").attr("class", "x axis zero");
 
       // Update the outer dimensions.
@@ -55,7 +56,7 @@
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>" + d[0] + "</strong> <span style='color:red'>" + d[1] * 100 + "%" + "</span>" + "<br>" + d[2];
+        return "<strong>" + d[0] + "</strong> <span style='color:gray'>" + d[1] * 100 + "%" + "</span>" + "<br> <span style='font-size: 80%'>" + d[2] + "</span>";
       })
 
       svg.call(tip);
@@ -73,7 +74,7 @@
           .on('mouseout', tip.hide);
 
     // x axis at the bottom of the chart
-     g.select(".x.axis")
+     g.select(".x.axis.bye")
         .attr("transform", "translate(0," + (height - margin.top - margin.bottom) + ")")
         .call(xAxis.orient("bottom"))
         .selectAll("text")  
@@ -81,7 +82,7 @@
      .attr("dx", "-.8em")
      .attr("dy", ".15em")
      .attr("transform", function(d) {
-         return "rotate(-90)" 
+         return "rotate(-45)" 
      });
     
     // zero line
@@ -92,7 +93,12 @@
     
       // Update the y-axis.
       g.select(".y.axis")
-        .call(yAxis);
+        .call(yAxis)
+        .append('text')
+            .attr('text-anchor', 'end')
+            .attr('y', 10)
+            .attr('transform', 'rotate(-90)')
+            .text('risk of having diabetes');
     });
   }
 
